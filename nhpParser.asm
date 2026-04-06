@@ -215,6 +215,25 @@ parse_and_run:
 .no_sort:
     pop rsi
     jmp .colspec_seller_check
-.not_fo
+not_food:
+
+    ; empty col spec = all columns (r15 stays 0)
+
+.colspec_seller_check:
+    call execute_query
+    jmp .parse_done
+
+.err_select:
+    PRINT err_no_select, err_no_select_l
+    jmp .parse_done
+.err_from:
+    PRINT err_no_from, err_no_from_l
+
+.parse_done:
+    pop r15
+    pop r14
+    pop r13
+    pop r12
+    ret
 
 
